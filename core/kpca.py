@@ -87,24 +87,25 @@ class KPCA(_Model, _Decomposer):
         return eigenvalues, eigenvectors
 
     def fit(self, x: np.ndarray) -> np.ndarray:
-        if x.shape[0] == 1:
-            raise OneSamplePassedException('Cannot perform KPCA for 1 sample.')
+        try:
+            if x.shape[0] == 1:
+                raise OneSamplePassedException('Cannot perform KPCA for 1 sample.')
 
-        self._x_fit = x
+            self._x_fit = x
 
-        kernel_matrix = self.kernel.calc_matrix(self._x_fit)
-        kernel_matrix = KPCA._center_symmetric_matrix(kernel_matrix)
+            kernel_matrix = self.kernel.calc_matrix(self._x_fit)
+            kernel_matrix = KPCA._center_symmetric_matrix(kernel_matrix)
 
-        eigenvalues, eigenvectors = np.linalg.eigh(kernel_matrix)
-        self.lambdas, self.alphas = self._clean_eigs(eigenvalues, eigenvectors)
+            eigenvalues, eigenvectors = np.linalg.eigh(kernel_matrix)
+            self.lambdas, self.alphas = self._clean_eigs(eigenvalues, eigenvectors)
 
-        self.explained_var = self.lambdas / np.sum(self.lambdas)
-        self._check_n_components(self._x_fit.shape[1])
+            self.explained_var = self.lambdas / np.sum(self.lambdas)
+            self._check_n_components(self._x_fit.shape[1])
 
-        self.alphas = np.delete(self.alphas, np.s_[self.n_components:], axis=1)
-        self.lambdas = np.delete(self.lambdas, np.s_[self.n_components:])
-
-        return kernel_matrix
+            self.alphas = np.delete(self.alphas, np.s_[self.n_components:], axis=1)
+            self.lambdas = np.delete(self.lambdas, np.s_[self.n_components:])
+        except:
+            pass
 
     def transform(self, x: np.ndarray) -> np.ndarray:
         if self._x_fit is None:
