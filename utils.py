@@ -148,6 +148,18 @@ def eval(x,y):
   from sklearn.metrics import ConfusionMatrixDisplay
   cm = confusion_matrix(y_true, y_pred)
   cm_display = ConfusionMatrixDisplay(cm).plot()
+  y_true = [0,0,0,0,1,1,1,1,1]
+  y_pred = [1,0,0,0,1,1,1,1,1]
+  import matplotlib.pyplot as plt
+  import numpy as np
+  from sklearn import metrics
+  fpr, tpr, thresholds = metrics.roc_curve(y_true, y_pred)
+  roc_auc = metrics.auc(fpr, tpr)
+  display = metrics.RocCurveDisplay(fpr=fpr, tpr=tpr, roc_auc=roc_auc,
+                                    estimator_name='example estimator')
+  display.plot()
+
+  plt.show()
     
 def visualize_features(ml_classifier, nb_neg_features=15, nb_pos_features=15):
 
