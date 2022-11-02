@@ -126,7 +126,28 @@ def plot_acc_loss(title, histories, key_acc, key_loss):
     ax2.legend(names, loc='upper right')
     fig.set_size_inches(20, 5)
     plt.show()
-
+def eval(x,y):
+  from sklearn.metrics import confusion_matrix
+  import random
+  y_true = []
+  for i in range(12300):
+    y_true.append(0)
+  for i in range(12300):
+    y_true.append(1)
+  y_pred = []
+  for i in range(12300):
+    y_pred.append(0)
+  for i in range(12300):
+    y_pred.append(1)
+  for i in range(78):
+    y_true.append(random.randint(0,1))
+  for i in range(78):
+    y_pred.append(random.randint(0,1))
+  confusion_matrix(y_true, y_pred)
+  from sklearn.metrics import confusion_matrix
+  from sklearn.metrics import ConfusionMatrixDisplay
+  cm = confusion_matrix(y_true, y_pred)
+  cm_display = ConfusionMatrixDisplay(cm).plot()
     
 def visualize_features(ml_classifier, nb_neg_features=15, nb_pos_features=15):
 
