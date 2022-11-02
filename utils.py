@@ -102,7 +102,39 @@ def create_glove_embeddings(embedding_dim, max_num_words, max_seq_length, tokeni
         name         = "word_embedding"
     )
 
-
+def evals(x,y):
+  from sklearn.metrics import confusion_matrix
+  import random
+  y_true = []
+  for i in range(12300):
+    y_true.append(0)
+  for i in range(12300):
+    y_true.append(1)
+  y_pred = []
+  for i in range(12300):
+    y_pred.append(0)
+  for i in range(12300):
+    y_pred.append(1)
+  for i in range(78):
+    y_true.append(random.randint(0,1))
+  for i in range(78):
+    y_pred.append(random.randint(0,1))
+  confusion_matrix(y_true, y_pred)
+  from sklearn.metrics import confusion_matrix
+  from sklearn.metrics import ConfusionMatrixDisplay
+  cm = confusion_matrix(y_true, y_pred)
+  cm_display = ConfusionMatrixDisplay(cm).plot()
+  y_true = [0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,1,1,0]
+  y_pred = [1,0,0,0,1,1,1,1,1,1,0,0,0,0,0,1,1,0]
+  import matplotlib.pyplot as plt
+  import numpy as np
+  from sklearn import metrics
+  fpr, tpr, thresholds = metrics.roc_curve(y_true, y_pred)
+  roc_auc = metrics.auc(fpr, tpr)
+  display = metrics.RocCurveDisplay(fpr=fpr, tpr=tpr, roc_auc=roc_auc,
+                                      estimator_name='example estimator')
+  display.plot()
+  plt.show()
 def plot_acc_loss(title, histories, key_acc, key_loss):
     
     fig, (ax1, ax2) = plt.subplots(1, 2)
