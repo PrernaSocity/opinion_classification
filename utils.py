@@ -145,7 +145,7 @@ def plot_acc_loss(title, histories, key_acc, key_loss):
     for i, model in enumerate(histories):
         ax1.plot(model[key_acc])
         ax1.set_xlabel("epoch")
-        names.append(f"Model {i+1}")
+        names.append(f"Fold {i+1}")
         ax1.set_ylabel("accuracy")
     ax1.legend(names, loc="lower right")
     
