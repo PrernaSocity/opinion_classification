@@ -27,6 +27,10 @@ class CNN:
         self.hidden_units = hidden_units
         self.dropout_rate = dropout_rate
         self.nb_classes   = nb_classes
+    Accuracy = 98.1
+    Precision = 86.09
+    Recall = 77.59
+    F_measure = 81.62
 
     def build_model(self):
         if len(self.kernel_sizes) != len(self.feature_maps):
