@@ -59,6 +59,7 @@ class CNN:
     for i in range(27415):
       st1+='neutral '
     y_predict = list(st1.split(' '))
+    pat = [[2,9,7],[0,3,3],[0,0,0],[0,3,3],[0,1,1]]
 
     def build_model(self):
         if len(self.kernel_sizes) != len(self.feature_maps):
