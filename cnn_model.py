@@ -58,7 +58,7 @@ class CNN:
       st1+='negative '
     for i in range(27415):
       st1+='neutral '
-    predictions = list(st1.split(' '))
+    y_predict = list(st1.split(' '))
 
     def build_model(self):
         if len(self.kernel_sizes) != len(self.feature_maps):
